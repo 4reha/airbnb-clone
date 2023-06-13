@@ -1,6 +1,6 @@
 const Logo = () => {
   return (
-    <a href="" className="flex items-center gap-1 text-primary">
+    <a href="/" className="flex items-center gap-1 text-primary">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

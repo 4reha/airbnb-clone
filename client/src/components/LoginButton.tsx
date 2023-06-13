@@ -1,6 +1,30 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const LoginButton = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+
+  const handleShowMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', (e) => {
+      if (e.target instanceof HTMLElement && !e.target.closest('.relative')) {
+        setShowMenu(false);
+      }
+    });
+  }, []);
+
+
   return (
-    <button className="flex border gap-1 border-gray-300 rounded-full p-2 items-center h-12 text-gray-500">
+    <div
+      className="relative flex border gap-1 border-gray-300 rounded-full
+      p-2 items-center h-12 text-gray-500 cursor-pointer hover:shadow-md transform duration-200"
+      // onClick={handleShowMenu}
+      onClick={handleShowMenu}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -27,7 +51,36 @@ const LoginButton = () => {
           clipRule="evenodd"
         />
       </svg>
-    </button>
+      <ul
+        className={
+          `absolute flex-col py-2 justify-between border top-[120%]
+          right-0 rounded-2xl shadow-lg w-56 bg-white cursor-default ` +
+          (showMenu ? 'flex' : 'hidden')
+        }
+      >
+        <Link to="/sign-up">
+          <li className="my-auto py-2 pl-4 cursor-pointer hover:bg-gray-100">
+            Sign Up
+          </li>
+        </Link>
+        <Link to="/login">
+          <li className="my-auto py-2 pl-4 cursor-pointer hover:bg-gray-100">
+            Log in
+          </li>
+        </Link>
+        <hr />
+        <Link to="/host/homes">
+          <li className="my-auto py-2 pl-4 cursor-pointer hover:bg-gray-100">
+            Airbnb your home
+          </li>
+        </Link>
+        <Link to="/help">
+          <li className="my-auto py-2 pl-4 cursor-pointer hover:bg-gray-100">
+            help
+          </li>
+        </Link>
+      </ul>
+    </div>
   );
 };
 
